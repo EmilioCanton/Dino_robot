@@ -507,334 +507,35 @@ void controleMotor(byte motor, byte sentido, int intensidade) {
 }
    */
 void estrategia0() { //Avança um pouco pra tentar identificar o robô inimigo
-  for (int i = 0; i <= 150; i+=10) {//0,04 delay 
-    controleMotor(motorE, Frente, i);
-    controleMotor(motorD, Frente, i);
-    delay(0.1);
-  }
-  controleMotor(motorE, Frente, 150);
-  controleMotor(motorD, Frente, 150);
-  int  i = 0;
-  while(i<179){//240ms
-    leituraSensores();
-    //VistoCentral
-    if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-      break;
-    }
-    
-    delay(1);
-    i++;
-  }
+     //Omitida  
 }
 
-void estrategia1() {  //Começar atras e buscar o oponente pela direita, se atingir limite de tempo vai pra frente, ajustando
-  //primeira virada pra direita 
-  for (int i = 0; i <= 50; i+=10) {//0,04 delay -->50 sentido anti-horario
-    controleMotor(motorE, SentidoHorario, i);
-    controleMotor(motorD, SentidoHorario, i);
-    delay(0.1);
-  }
-  int i = 0;
-  while(i<110){// espera a virada pra direita
-    leituraSensores();
-    //VistoCentral
-    if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-      break;
-    }
-    
-    delay(1);
-    i++;
-  } 
-  //zerar motores 
-  controleMotor(motorE, Parado, 0);
-  controleMotor(motorD, Parado, 0);
-
-  //inicio da rotina
-  int j=0;
-   while(j<5){
-    if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-        break;
-      }
-    //Faz a primeira virada completa pra esquerda
-    for (int i = 0; i <= 50; i+=10) {//0,04 delay 
-      controleMotor(motorE, SentidoAntiHorario, i);
-      controleMotor(motorD, SentidoAntiHorario, i);
-      delay(0.1);
-    }
-    i = 0;
-    while(i<240){// espera a virada pra esquerda
-      leituraSensores();
-      //VistoCentral
-      if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-        break;
-      } 
-      delay(1);
-      i++;
-    }
-    //zerar motores 
-    controleMotor(motorE, Parado, 0);
-    controleMotor(motorD, Parado, 0);
-    //Faz a primeira virada completa pra direita
-
-    for (int i = 0; i <= 50; i+=10) {//0,04 delay 
-      controleMotor(motorE, SentidoHorario, i);
-      controleMotor(motorD, SentidoHorario, i);
-      delay(0.1);
-    }
-    i = 0;
-    while(i<200){// espera a virada pra direita
-      leituraSensores();
-      //VistoCentral
-      if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-        break;
-      } 
-      delay(1);
-      i++;
-    }
-    controleMotor(motorE, Parado, 0);
-    controleMotor(motorD, Parado, 0); 
-    j++;
-  }
-  //fim da rotina
- 
+void estrategia1() {  //Começar atras e buscar o oponente pela direita, se atingir limite de tempo vai pra frente
+     //Omitida  
 }
 
-void estrategia2(){ //arco para a direita, começando virado para a direita PRECISA DE AJUSTES
-  for (int i = 50; i <= 150; i+=5) { //0,04 delay 
-    controleMotor(motorE, Frente, i-50);
-    controleMotor(motorD, Frente, i);
-    delay(0.1);
-  }
-
-  int  i = 0;
-  while(i<372){// Recalculado o tempo do delay, inicial = 500
-    leituraSensores();
-    //VistoCentral
-    if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-      break;
-    }
-    
-    delay(1);
-    i++;
-  }
-
-  controleMotor(motorE, Parado, 0);
-  controleMotor(motorD, Parado, 0);
- 
-  for (int i = 0; i <= 100; i+=1) {
-    controleMotor(motorE, SentidoAntiHorario, 100);
-    controleMotor(motorD, SentidoAntiHorario, 100);
-    delay(0.1);
-  }
-  i = 0;
-  while(i<179){//240
-    leituraSensores();
-    //VistoCentral
-    if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-      break;
-    }
-    
-    delay(1);
-    i++;
-  }
-  controleMotor(motorE, Parado, 0);
-  controleMotor(motorD, Parado, 0);
-
-  for (int i = 0; i <= 180; i++) {//Não precisa de rampa pois vai manter a mesma velocidade anterior
-  controleMotor(motorE, Frente, i);
-  controleMotor(motorD, Frente, i);
-  delay(0.1);
-  }
-  i = 0;
-  while(i<50){//67,2
-    leituraSensores();
-    //VistoCentral
-    if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-       break;
-    }
-    
-    delay(1);
-    i++;
-  }
-  
+void estrategia2(){ //arco para a direita, começando virado para a direita
+     //Omitida  
 }
 
-void estrategia3(){ //Arco para a esquerda, começando virado para a esquerda PRECISA DE AJUSTES
-  for (int i = 50; i <= 150; i+=5) { //0,04 delay 
-    controleMotor(motorE, Frente, i);
-    controleMotor(motorD, Frente, i-50);
-    delay(0.1);
-  }
-
-  int  i = 0;
-  while(i<372){// Recalculado o tempo do delay, inicial = 500
-    leituraSensores();
-    //VistoCentral
-    if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-      break;
-    }
-    
-    delay(1);
-    i++;
-  }
-
-  controleMotor(motorE, Parado, 0);
-  controleMotor(motorD, Parado, 0);
- 
-  for (int i = 0; i <= 100; i+=1) {
-    controleMotor(motorE, SentidoHorario, 100);
-    controleMotor(motorD, SentidoHorario, 100);
-    delay(0.1);
-  }
-  i = 0;
-  while(i<179){//240
-    leituraSensores();
-    //VistoCentral
-    if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-      break;
-    }
-    
-    delay(1);
-    i++;
-  }
-  controleMotor(motorE, Parado, 0);
-  controleMotor(motorD, Parado, 0);
-
-  for (int i = 0; i <= 180; i++) {//Não precisa de rampa pois vai manter a mesma velocidade anterior
-  controleMotor(motorE, Frente, i);
-  controleMotor(motorD, Frente, i);
-  delay(0.1);
-  }
-  i = 0;
-  while(i<50){//67,2
-    leituraSensores();
-    //VistoCentral
-    if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-       break;
-    }
-    
-    delay(1);
-    i++;
-  }
-  
+void estrategia3(){ //Arco para a esquerda, começando virado para a esquerda
+     //Omitida  
 }
 
-void estrategia4() {  //Começar atras e buscar o oponente pela esquerda, se atingir limite de tempo vai pra frente, ajustando
-  //primeira virada pra esquerda
-  for (int i = 0; i <= 50; i+=10) {//0,04 delay --> 50 antihorario
-    controleMotor(motorE, SentidoAntiHorario, i);
-    controleMotor(motorD, SentidoAntiHorario, i);
-    delay(0.1);
-  }
-  int i = 0;
-  while(i<110){// espera a virada pra esquerda
-    leituraSensores();
-    //VistoCentral
-    if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-      break;
-    }
-    
-    delay(1);
-    i++;
-  }
-
-  
-  //zerar motores 
-  controleMotor(motorE, Parado, 0);
-  controleMotor(motorD, Parado, 0);
-  
-  //delay(1000);
-  //inicio da rotina
-  int j=0;
-   while(j<5){
-    if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-        break;
-      }
-    //Faz a primeira virada completa pra direita
-    for (int i = 0; i <= 50; i+=10) {//0,04 delay 
-      controleMotor(motorE, SentidoHorario, i);
-      controleMotor(motorD, SentidoHorario, i);
-      delay(0.1);
-    }
-    i = 0;
-    while(i<190){// espera a virada pra direita
-      leituraSensores();
-      //VistoCentral
-      if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-        break;
-      }
-      
-      delay(1);
-      i++;
-    }
-    //zerar motores 
-    controleMotor(motorE, Parado, 0);
-    controleMotor(motorD, Parado, 0);
-    //delay(500);
-    //Faz a primeira virada completa pra esquerda
-    for (int i = 0; i <= 50; i+=10) {//0,04 delay 
-      controleMotor(motorE, SentidoAntiHorario, i);
-      controleMotor(motorD, SentidoAntiHorario, i);
-      delay(0.1);
-    }
-    i = 0;
-    while(i<220){// espera a virada pra direita
-      leituraSensores();
-      //VistoCentral
-      if ((valorE >= InimigoVisto) || (valorC >= InimigoVisto) || (valorD >= InimigoVisto)){
-        break;
-      }
-      
-      delay(1);
-      i++;
-    }   
-    controleMotor(motorE, Parado, 0);
-    controleMotor(motorD, Parado, 0);
-    //delay(500);
-    
-    j++;
-  }
-  //fim da rotina
- 
+void estrategia4() {  //Começar atras e buscar o oponente pela esquerda, se atingir limite de tempo vai pra frente
+     //Omitida  
 }
 
-void estrategia5() { //Sem estrategia -> EMPATE
-  return;
-  
+void estrategia5() { //Estrategia para casos de desempate
+     //Omitida  
 }
 
-void estrategia6() { //Ir pra tras
-  for (int i = 0; i <= 200; i+=10) {//0,04 delay 
-    controleMotor(motorE, SentidoAntiHorario, i);
-    controleMotor(motorD, SentidoHorario, i);
-    delay(0.1);
-  }
-  delay(300);
-  //controleMotor(motorE, Frente, 255);
-  //controleMotor(motorD, Frente, 255);
-  int valorC = analogRead(SensorC);
-  if (valorC >= LimiarDistancia) {
-    for (int i = 200; i <= 255; i++) {//Não precisa de rampa pois vai manter a mesma velocidade anterior
-    controleMotor(motorE, Frente, i);
-    controleMotor(motorD, Frente, i);
-    delay(0.1);
-    }
-    delay(300);
-    controleMotor(motorE, Parado, 0);
-    controleMotor(motorD, Parado, 0);
-    //Para depois disso tudo pra poder chamar a função de busca
-  }
-  else {
-    controleMotor(motorE, Parado, 0);
-    controleMotor(motorD, Parado, 0);
-    //Para antes de chamar a função de busca
-    return;
-  }
+void estrategia6() { //Ré
+     //Omitida  
 }
 
-void estrategia7() { //Ir para frente
-  //g
-  
+void estrategia7() { //Debug
+     //Omitida  
 }
 
 
